@@ -13,8 +13,8 @@ import Curent from "./current";
 import CurentGPS from "./currentGPS";
 import styles from "./styles";
 
-let cities = ["Poprad", "Bratislava"];
 export default function App() {
+  const [cities, setCities] = useState(["Poprad", "Bratislava", "Košice"]);
   const [inputData, setInputData] = useState<string>("");
   const [arr, setArr] = useState([cities]);
 
@@ -35,8 +35,10 @@ export default function App() {
     };
     isPermison();
   }, []);
-  const removeItem = (index: any) => {
-    cities.concat(index);
+  const removeItem = (city: any) => {
+    let index = cities.indexOf(city);
+    const newarr = cities.filter((_, i) => i !== index);
+    setCities(newarr);
   };
 
   return (
@@ -46,6 +48,10 @@ export default function App() {
       pagingEnabled={true}
       showsHorizontalScrollIndicator={false}
     >
+      <CurentGPS />
+      {cities.map((city, i) => {
+        return <Curent key={i} city={city} cities={cities} />;
+      })}
       <View style={styles.container}>
         <TextInput
           style={styles.input}
@@ -67,10 +73,6 @@ export default function App() {
           )}
         />
       </View>
-      <CurentGPS />
-      {cities.map((city, i) => {
-        return <Curent key={i} city={city} cities={cities} />;
-      })}
     </ScrollView>
   );
 }
