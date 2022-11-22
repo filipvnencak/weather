@@ -20,7 +20,9 @@ export default function main(props: {
         <Text style={styles.subtitle}>Feels like:</Text>
         <Text style={styles.subtitle}>{Math.round(props.feels_like)}°C</Text>
       </View>
-      <Text style={styles.currentDescription}>{props.description}</Text>
+      <View>
+        <Text style={styles.currentDescription}>{props.description}</Text>
+      </View>
     </View>
   );
 }
